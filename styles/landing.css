@@ -30,7 +30,7 @@ body.landing {
      position: relative;
  }
  
- .point:hover {
+ .point {
      position: relative;
      padding: 2rem;
      text-align: center;
