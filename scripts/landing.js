@@ -1,4 +1,4 @@
-var pointsArray = document.getElementsbyClassName('point');
+var pointsArray = document.getElementsByClassName('point');
 
 var animatePoints = function(points) {
     
@@ -10,7 +10,8 @@ var animatePoints = function(points) {
                         }
     for (var i = 0; i < points.length; i++) {
                     revealPoint(i);
-    }
+                    console.log("text");
+    } 
 };
 
  window.onload = function() {
