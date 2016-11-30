@@ -30,6 +30,21 @@
      ]
  };
 
+var albumOdessa = {
+     title: 'The Rainbow',
+     artist: 'Odessa X',
+     label: 'EM',
+     year: '1983',
+     albumArtUrl: 'assets/images/album_covers/11.png',
+     songs: [
+         { title: 'Work It!', duration: '1:11' },
+         { title: 'Oh my dear', duration: '3:45' },
+         { title: 'What Up, What Up', duration: '2:31'},
+         { title: 'Love in the rainbow', duration: '4:14' },
+         { title: 'Sun and Clouds', duration: '5:00'}
+     ]
+ };
+
 var createSongRow = function(songNumber, songName, songLength) {
      var template =
         '<tr class="album-view-song-item">'
@@ -42,14 +57,15 @@ var createSongRow = function(songNumber, songName, songLength) {
      return template;
  };
 
- var setCurrentAlbum = function(album) {
-     // #1
+// Set elements that we want to populate with text dynamically
      var albumTitle = document.getElementsByClassName('album-view-title')[0];
      var albumArtist = document.getElementsByClassName('album-view-artist')[0];
      var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
      var albumImage = document.getElementsByClassName('album-cover-art')[0];
      var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
- 
+
+
+ var setCurrentAlbum = function(album) {
      // #2
      albumTitle.firstChild.nodeValue = album.title;
      albumArtist.firstChild.nodeValue = album.artist;
@@ -67,4 +83,14 @@ var createSongRow = function(songNumber, songName, songLength) {
  
  window.onload = function() {
      setCurrentAlbum(albumPicasso);
+     
+     var albums = [albumPicasso, albumMarconi, albumOdessa];
+     var index = 1;
+     albumImage.addEventListener("click", function(event){
+         setCurrentAlbum(albums[index]);
+         index++;
+         if (index == albums.length){
+             index = 0;
+         }
+     });  
  };
