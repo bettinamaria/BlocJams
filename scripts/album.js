@@ -30,6 +30,22 @@
      ]
  };
 
+ var albumOdessa = {
+     title: 'The Rainbow',
+     artist: 'Odessa X',
+     label: 'EM',
+     year: '1983',
+     albumArtUrl: 'assets/images/album_covers/11.png',
+     songs: [
+         { title: 'Work It!', duration: '1:11' },
+         { title: 'Oh my dear', duration: '3:45' },
+         { title: 'What Up, What Up', duration: '2:31'},
+         { title: 'Love in the rainbow', duration: '4:14' },
+         { title: 'Sun and Clouds', duration: '5:00'}
+     ]
+ };
+
+
 var createSongRow = function(songNumber, songName, songLength) {
      var template =
         '<tr class="album-view-song-item">'
@@ -66,5 +82,13 @@ var createSongRow = function(songNumber, songName, songLength) {
  };
  
  window.onload = function() {
-     setCurrentAlbum(albumPicasso);
+     setCurrentAlbum(allAlbums);
+     var allAlbums = document.getElementsByClassName('album-view-title')[0];
+     for (var i = 0; i < allAlbums.length; i++) {
+         allAlbums[i].addEventListener("click", function(event) {
+            allAlbums.toggle('clicked');
+        }); 
+     }
  };
+
+//Add an event listener to the album cover. When a user clicks it, the album page content should toggle between the three album objects: albumPicasso, albumMarconi, and your album object.//
