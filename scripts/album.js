@@ -108,11 +108,16 @@ var currentlyPlayingSong = null;
      
      var findParentByClassName = function(element, targetClass) {
         var currentParent = element.parentElement;
-        if (element != currentParent) {
-            alert("No parent found");
-        } else if (currentParent.className !== targetClass) {
-            alert("No parent found with that class name.");
-        }
+         if (currentParent === null) {
+            alert("No parent found!"); 
+         }
+         while (currentParent.className != targetClass && currentParent.className !== null) {
+             currentParent = currentParent.parentElement;
+             if (currentParent === null) {
+                 alert("No parent found with that class name.")
+             }
+         } 
+         return currentParent;          
     }; 
     /* Re-write the function so that it: Checks to see if a parent exists. If it doesn't, then show an alert that says "No parent found". Shows a different alert when it fails to find a parent with the given class name: "No parent found with that class name".
      */  
