@@ -189,13 +189,15 @@ var currentSongFromAlbum = null;
 var currentSoundFile = null;
 var currentVolume = 80;
 
- var $previousButton = $('.main-controls .previous');
- var $nextButton = $('.main-controls .next');
- 
+var $previousButton = $('.main-controls .previous');
+var $nextButton = $('.main-controls .next');
+var playPauseControls = $('.main-controls .play-pause');
+
  $(document).ready(function(){
      setCurrentAlbum(albumPicasso);
      $previousButton.click(previousSong);
      $nextButton.click(nextSong);
+     $playPauseControls.click(togglePlayFromPlayerBar());
  });
 
 
