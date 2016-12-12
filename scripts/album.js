@@ -178,6 +178,20 @@ var updatePlayerBarSong = function() {
     $('.main-controls .play-pause').html(playerBarPauseButton);
 };
 
+//Assignment function placed at correct spot? //
+var togglePlayFromPlayerBar = function() {
+    if (){ //song is paused && playbutton clicked in playerbar// 
+       $nextSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber).pause;
+       $nextSongNumberCell.html(playerBarPauseButton);
+       //play the song
+    }   
+    if (currentSoundFile && ){ // song is playing && pause button clicked
+       $nextSongNumberCell = getSongNumberCell(xxx).play//change song number cell from pause to play button
+       $nextSongNumberCell.html(playerBarPlayButton);// change html of player pause button to play button
+       // pause the song
+    }
+};
+
 var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
 var pauseButtonTemplate = '<a class="album-song-button"><span class="ion-pause"></span></a>';
 // Store state of playing songs
