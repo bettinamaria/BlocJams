@@ -8,18 +8,21 @@ var setSong = function(songNumber){
          formats: [ 'mp3' ],
          preload: true
      });
-     var seek = function(time) {
+    
+     setVolume(currentVolume); 
+};
+
+ var seek = function(time) {
          if (currentSoundFile) {
              currentSoundFile.setTime(time);
          }
-     }
-     setVolume(currentVolume);
-     var setVolume = function(volume) {
+     };
+
+var setVolume = function(volume) {
          if (currentSoundFile) {
              currentSoundFile.setVolume(volume);
          }
      };
-};
 
 var getSongNumberCell = function(number){
         return $('.song-item-number[data-song-number="' + number + '"]');
