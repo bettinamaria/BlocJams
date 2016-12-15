@@ -130,9 +130,9 @@ var updateSeekBarWhileSongPlays = function() {
              var $seekBar = $('.seek-control .seek-bar');
  
              updateSeekPercentage($seekBar, seekBarFillRatio);
+             setCurrentTimeInPlayerBar();
          });
      }
-    //Add the method of setCurrentTimeInPlayerBar to updateSeekBarWhileSongPlays() so the current time updates with song playback. Is this here?//
 };
 
 var updateSeekPercentage = function($seekBar, seekBarFillRatio) {
@@ -265,47 +265,38 @@ var updatePlayerBarSong = function() {
     $('.currently-playing .artist-name').text(currentAlbum.artist);
     $('.currently-playing .artist-song-mobile').text(currentSongFromAlbum.title + " - " + currentAlbum.title);
     $('.main-controls .play-pause').html(playerBarPauseButton);
-    
+    setTotalTimeInPlayerBar();
     //Add the method to updatePlayerBarSong() so the total time is set when a song first plays. setTotalTimeInPlayerBar?
 };
 
-
 //Assignment20 Function at right spot to play and pause from bar?
 var togglePlayFromPlayerBar = function() {
-     if ($playPauseControls && $playPauseControls.click){ //song is paused && playbutton clicked in playerbar// 
-       $nextSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber).pause;
-       $nextSongNumberCell.html(playerBarPauseButton);
-       //play the song
-    }   
-    if (currentSoundFile && ){ // song is playing && pause button clicked
-       $nextSongNumberCell = getSongNumberCell(xxx).play//change song number cell from pause to play button
-       $nextSongNumberCell.html(playerBarPlayButton);// change html of player pause button to play button
-       // pause the song
+    if (currentSoundFile && currentSoundFile.isPaused()){
+        currentSoundFile.play();
+        var songCell = getSongNumberCell(currentlyPlayingSongNumber);
+        songCell.html(pauseButtonTemplate);
+        $playPauseControls.html(playerBarPauseButton);
+    } else if (currentSoundFile){
+      currentSoundFile.pause(); 
+      var songCell = getSongNumberCell(currentlyPlayingSongNumber);
+      songCell.html(playButtonTemplate);
+      $playPauseControls.html(playerBarPlayButton);
+    } else {
+      setSong(1); 
+      currentSoundFile.play();    
     }
 };
 
 //Assignment21 Function to set currentTimeinPlayerBar
-var setCurrentTimeInPlayerBar = function(currentTime){
-    $('.current-time').text(currentTime);
+var setCurrentTimeInPlayerBar = function(){
+    $('.current-time').text(buzz.toTimer(currentSoundFile.getTime()));
 };
 
 //Write a function called setTotalTimeInPlayerBar() that takes one argument, totalTime, that sets the text of the element with the .total-time class to the length of the song. Did we create var songLength?
-var setTotalTimeInPlayerBar = function(totalTime){
- $('.total-time').text(songLength);  
+var setTotalTimeInPlayerBar = function(){
+ $('.total-time').text(buzz.toTimer(currentSongFromAlbum.duration));  
 }; //Add the method to updatePlayerBarSong() so the total time is set when a song first plays.
 
-//Write a function called filterTimeCode that takes one argument, timeInSeconds. It should:
-//Use the parseFloat() method to get the seconds in number form.
-//Store variables for whole seconds and whole minutes (hint: use Math.floor() to round numbers down).
-//Return the time in the format X:XX
-//Wrap the arguments passed to setCurrentTimeInPlayerBar() and setTotalTimeInPlayerBar() in a filterTimeCode() call so the time output below the seek bar is formatted.
-//Wrap the songLength variable in createSongRow() in a filterTimeCode() call so the time lengths are formatted. -- when did we create this variable? //
-var filterTimeCode = function(){
-    parseFloat();
-    Math.floor()
-    return x:xx;
-    filterTimeCode(setCurrentTimeInPlayerBar(), setTotalTimeInPlayerBar());
-};
      
 var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
 var pauseButtonTemplate = '<a class="album-song-button"><span class="ion-pause"></span></a>';
@@ -327,7 +318,7 @@ var $playPauseControls = $('.main-controls .play-pause');
      setupSeekBars();
      $previousButton.click(previousSong);
      $nextButton.click(nextSong);
-     $playPauseControls.click(togglePlayFromPlayerBar());
+     $playPauseControls.click(togglePlayFromPlayerBar);
  });
 
 
